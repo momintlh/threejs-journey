@@ -1,1 +1,0 @@
-This repo contains stuff from threejs journey!
