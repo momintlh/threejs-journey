@@ -1,0 +1,1 @@
+This repo contains my implementations of projects from ThreeJS-Journey course by Bruno Simon
