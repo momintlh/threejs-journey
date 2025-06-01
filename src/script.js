@@ -23,6 +23,10 @@ mesh.position.set(1, -1, -1)
 // Length of the position vector from the origin;
 console.log(mesh.position.length()) 
 
+
+const axesHelper = new THREE.AxesHelper()
+scene.add(axesHelper)
+
 scene.add(mesh)
 
 
