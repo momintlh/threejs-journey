@@ -17,6 +17,12 @@ mesh.position.x = 1
 mesh.position.y = -1
 mesh.position.z = -1
 
+// or alternatively
+mesh.position.set(1, -1, -1)
+
+// Length of the position vector from the origin;
+console.log(mesh.position.length()) 
+
 scene.add(mesh)
 
 
@@ -33,6 +39,10 @@ const sizes = {
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 3
+
+// Distance from the mesh to the camera;
+console.log(mesh.position.distanceTo(camera.position)) 
+
 scene.add(camera)
 
 /**
