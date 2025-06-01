@@ -26,6 +26,10 @@ console.log(mesh.position.length())
 //scale 
 mesh.scale.set(0.5, 2, 0.5)
 
+
+// rotation with rotation property
+mesh.rotation.z = Math.PI / 4 // 45 degrees in radians 
+
 const axesHelper = new THREE.AxesHelper()
 scene.add(axesHelper)
 
