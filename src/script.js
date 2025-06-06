@@ -7,34 +7,32 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 /**
- * Objects
+ * Helpers
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-const mesh = new THREE.Mesh(geometry, material)
-
-mesh.position.x = 1
-mesh.position.y = -1
-mesh.position.z = -1
-
-// or alternatively
-mesh.position.set(1, -1, -1)
-// Length of the position vector from the origin;
-console.log(mesh.position.length()) 
-//scale 
-mesh.scale.set(0.5, 2, 0.5)
-
-
-// rotation with rotation property
-mesh.rotation.z = Math.PI / 4 // 45 degrees in radians 
-
 const axesHelper = new THREE.AxesHelper()
 scene.add(axesHelper)
 
 
+/**
+ * Meshes
+ */
+const sphereMesh = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0x00ff00 }))
+const boxMesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0xff0000 })
+)
 
-scene.add(mesh)
+const group = new THREE.Group()
+group.add(sphereMesh)
+group.add(boxMesh)
 
+
+scene.add(group)
+
+// Position objects
+sphereMesh.position.x = -1
+boxMesh.position.x = 1
+
+group.position.y = 0.5 // Move the group up
+group.rotation.y = Math.PI / 4 // Rotate the group
 
 /**
  * Sizes
@@ -51,9 +49,8 @@ const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 3
 
 // Distance from the mesh to the camera;
-console.log(mesh.position.distanceTo(camera.position)) 
-camera.lookAt(mesh.position) // Make the camera look at the mesh
-
+console.log(group.position.distanceTo(camera.position))
+// camera.lookAt(group.position) // Make the camera look at the mesh
 scene.add(camera)
 
 /**
