@@ -21,8 +21,6 @@ mesh.position.z = -1
 mesh.position.set(1, -1, -1)
 // Length of the position vector from the origin;
 console.log(mesh.position.length()) 
-
-
 //scale 
 mesh.scale.set(0.5, 2, 0.5)
 
@@ -32,6 +30,8 @@ mesh.rotation.z = Math.PI / 4 // 45 degrees in radians
 
 const axesHelper = new THREE.AxesHelper()
 scene.add(axesHelper)
+
+
 
 scene.add(mesh)
 
@@ -52,6 +52,7 @@ camera.position.z = 3
 
 // Distance from the mesh to the camera;
 console.log(mesh.position.distanceTo(camera.position)) 
+camera.lookAt(mesh.position) // Make the camera look at the mesh
 
 scene.add(camera)
 
