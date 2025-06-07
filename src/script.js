@@ -22,3 +22,14 @@ scene.add(boxMesh);
 const renderer = new THREE.WebGLRenderer({canvas: canvas});
 renderer.setSize(sizes.width, sizes.height);
 renderer.render(scene, camera);
+
+const tick = () => {
+  boxMesh.rotation.x += 0.01;
+  boxMesh.rotation.y += 0.01;
+
+  renderer.render(scene, camera);
+
+  window.requestAnimationFrame(tick);
+}
+
+tick();
