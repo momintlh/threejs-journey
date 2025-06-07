@@ -4,4 +4,6 @@
 4. requestAnimation is not different for computer, same thing, it needs a time.deltatime like thing.
 5. One way is to use use DateTime (date.now), creating our own delta!
     - Calculting deltaTime means saving prev time, subing current time from prev time and setting its new value.
-6. Another wat to do the same thing is using `Clock` class from threejs
+6. Another wat to do the same thing is using `Clock` class from threejs.
+7. And we can obviously use third party libs like gsap.
+8. No "best solution" depends on the project reqs.
