@@ -10,8 +10,6 @@ const cube = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000);
 camera.position.z = 5
 
-
-
 const scene = new THREE.Scene();
 scene.add(cube);
 scene.add(camera)

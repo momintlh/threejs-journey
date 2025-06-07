@@ -1,4 +1,9 @@
-1. We need a canvs to render the scene and camera
-2. Scene is similar to a Unity scene > collection of objects, meshes
-3. For now I know there is a perspective camera, similar to the one in Unity and blender, there might be a orthographic camera maybe?
-4. Creating an JS object is pretty handy.
+### 6-Cameras
+6/7/25
+
+1. All camera types inherit from an abstract `Camera` class.
+2. ArrayCamera:
+3. CubeCamera:
+4. StereoCamera:
+5. OrthgraphicCamera:
+6. PerspectiveCamera:
