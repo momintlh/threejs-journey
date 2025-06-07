@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import gsap from 'gsap';
 
 const canvas = document.querySelector('canvas.webgl');
 
@@ -19,17 +20,69 @@ const boxMesh = new THREE.Mesh(
 
 scene.add(boxMesh);
 
-const renderer = new THREE.WebGLRenderer({canvas: canvas});
+const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 renderer.setSize(sizes.width, sizes.height);
-renderer.render(scene, camera);
 
-const tick = () => {
-  boxMesh.rotation.x += 0.01;
+const tickWithoutDelta = () => {
   boxMesh.rotation.y += 0.01;
-
   renderer.render(scene, camera);
-
-  window.requestAnimationFrame(tick);
+  window.requestAnimationFrame(tickWithoutDelta);
 }
 
-tick();
+// tickWithoutDelta();
+
+let time = Date.now()
+
+const tickWithDelta = () => {
+  // get current time
+  const currentTime = Date.now();
+
+  // subtrackt time from prev tick
+  const deltaTime = currentTime - time;
+
+  // set new value
+  time = currentTime;
+
+  boxMesh.rotation.y += 0.01 * deltaTime;
+  renderer.render(scene, camera);
+  window.requestAnimationFrame(tickWithoutDelta);
+}
+// tickWithDelta();
+
+//#region Clock based
+const clock = new THREE.Clock();
+
+const tickWithClock = () => {
+  // starts with 0 and seconds
+  const elaspedTime = clock.getElapsedTime();
+
+  camera.position.y = Math.sin(elaspedTime);
+  camera.position.x = Math.cos(elaspedTime);
+
+  camera.lookAt(boxMesh.position)
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(tickWithClock)
+}
+// tickWithClock();
+
+//#endregion
+
+//#region Using GSAP!!!
+gsap.to(boxMesh.position, {
+  x: 2,
+  duration: 1,
+  delay: 1
+})
+
+
+const tickWithGsap = () => {
+  renderer.render(scene, camera);
+  requestAnimationFrame(tickWithGsap)
+}
+
+tickWithGsap()
+
+
+
+//#endregion
