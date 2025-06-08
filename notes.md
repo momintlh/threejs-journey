@@ -29,3 +29,18 @@
 ## Non camera controls
 8. **TransformControls**: has nothing to do with camera controls but it is used to move objects, GIZMO basically
 2. **DragControls**:  dragging objects! drag and drop??
+
+
+### Orbit Controls:
+- Not accessible from THREEJS but it is an addon
+```js
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// new OrbitControls(object: any, domElement?: null)
+```
+- need a domElement for mouse events
+- it has zooming, moving, paning.
+- to have damping enabled, make sure to call controls.update on every tick.
+
+### When to Use Built-In-Controls:
+- Depends on the requirements, just check if the built-in one has all the features or not  

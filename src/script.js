@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 //#region Cursor
 // native js:
@@ -48,18 +49,26 @@ const renderer = new THREE.WebGLRenderer({ canvas: canvas })
 renderer.setSize(sizes.width, sizes.height);
 
 const clock = new THREE.Clock();
-camera.lookAt(cube.position)
+
+//#region orbitControls
+const controls = new OrbitControls(camera, canvas)
+// controls.target.y = 1
+// controls.update()
+//#endregion
+
+//damping
+controls.enableDamping = true
 
 const rotateCube = () => {
   const elaspedTime = clock.getElapsedTime();
 
-  camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3
-  camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3
-  camera.position.y = cursor.y * 5
-
-  camera.lookAt(cube.position)
-
+  // camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3
+  // camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3
+  // camera.position.y = cursor.y * 5
+  // camera.lookAt(cube.position)
   // cube.rotation.y = elaspedTime
+
+  controls.update()
 
   renderer.render(scene, camera)
   requestAnimationFrame(rotateCube)
