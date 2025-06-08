@@ -9,6 +9,9 @@
 6. PerspectiveCamera: _renders with perspective_
 
 #### PerspectiveCamera:
-
+    - (fov, aspectRatio, near, far)
+    - Don't use too small / large values for near and far, to prevent [[z-fighting]]
 #### OrthgraphicCamera:
+    - (left, right, top, bottom, near, far)
+    - doing a square render so canvas should be square. OR we use aspect ratio
     
