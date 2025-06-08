@@ -3,10 +3,14 @@ import * as THREE from 'three'
 //#region Cursor
 // native js:
 
+const cursor = {
+  x: 0,
+  y: 0
+}
 window.addEventListener("mousemove", (event) => {
-  console.log(event.clientX);
+  cursor.x = event.clientX / sizes.width - 0.5
+  cursor.y = -(event.clientY / sizes.height - 0.5)
 })
-
 //#endregion
 
 
@@ -48,6 +52,11 @@ camera.lookAt(cube.position)
 
 const rotateCube = () => {
   const elaspedTime = clock.getElapsedTime();
+
+  camera.position.x = cursor.x * 3
+  camera.position.y = cursor.y * 3
+  camera.lookAt(cube.position)
+
 
   // cube.rotation.y = elaspedTime
 
