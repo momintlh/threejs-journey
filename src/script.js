@@ -1,8 +1,9 @@
 import * as THREE from 'three'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const sizes = {
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
 }
 const aspectRatio = sizes.width / sizes.height
 
@@ -17,6 +18,16 @@ const boxMesh = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMater
 scene.add(camera);
 scene.add(boxMesh);
 
+
+const control = new OrbitControls(camera, canvas)   
+
+
 const renderer = new THREE.WebGLRenderer({ canvas: canvas })
 renderer.setSize(sizes.width, sizes.height)
-renderer.render(scene, camera);
+
+const tick = () => {
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick)
+}
+
+tick()
