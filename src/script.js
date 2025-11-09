@@ -50,10 +50,26 @@ const scene = new THREE.Scene()
 
 const camera = new THREE.PerspectiveCamera(75, sizes.aspectRatio, 0.1, 100);
 camera.position.z = 2;
-const boxMesh = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ color: 0xFFFF00 }))
+
+const vertexPositionsArray = new Float32Array([
+    0, 0, 0,
+    0, 1, 0,
+    0, 0, 1,
+])
+
+
+
+const positionsAttribute = new THREE.BufferAttribute(vertexPositionsArray, 3)
+
+const geometery = new THREE.BufferGeometry()
+geometery.setAttribute("position", positionsAttribute)
+
+const material = new THREE.MeshBasicMaterial({ color: 0xFFFF00, wireframe: true })
+
+const myMesh = new THREE.Mesh(geometery, material)
 
 scene.add(camera);
-scene.add(boxMesh);
+scene.add(myMesh);
 
 
 const control = new OrbitControls(camera, canvas)
