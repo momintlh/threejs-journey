@@ -57,3 +57,25 @@ Then we can use this with `ThreeJS.BufferAttribute(float32Array, noOfVertices)`
 Imp Notes:
 - position here is a predefined property threejs's shader
 `geometery.setAttribute("position", positionsAttribute)`
+
+### Basic Example:
+
+```js
+const vertexPositionsArray = new Float32Array([
+    0, 0, 0,
+    0, 1, 0,
+    0, 0, 1,
+])
+
+const positionsAttribute = new THREE.BufferAttribute(vertexPositionsArray, 3)
+
+const geometery = new THREE.BufferGeometry()
+geometery.setAttribute("position", positionsAttribute)
+
+const material = new THREE.MeshBasicMaterial({ color: 0xFFFF00, wireframe: true })
+
+const myMesh = new THREE.Mesh(geometery, material)
+```
+
+### Index
+Some geometries have faces that share common vertices, when create a custom geometry using BufferGeometry we can specify bunch of vertices and then indices to create the face and reuse vertices multiple times, instead of create a new vertex. This can improve the performance.
