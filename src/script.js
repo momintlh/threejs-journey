@@ -1,5 +1,23 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import gsap from 'gsap';
+import GUI from 'lil-gui';
+
+/**
+ * Debug
+ */
+
+const gui = new GUI({ width: 300, closeFolders: true, title: 'cool debug' })
+// gui.hide()
+
+window.addEventListener('keypress', (event) => {
+    if(event.key == 'h')
+        gui.show(gui._hidden)
+
+});
+
+// my debug holder
+const debugObject = {}
 
 const sizes = {
     width: window.innerWidth,
@@ -50,10 +68,51 @@ const scene = new THREE.Scene()
 
 const camera = new THREE.PerspectiveCamera(75, sizes.aspectRatio, 0.1, 100);
 camera.position.z = 2;
-const boxMesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1, 2, 2, 2), new THREE.MeshBasicMaterial({ color: 0xFFFF00, wireframe: true }))
+
+debugObject.color = '#1f84d1'
+
+const boxMesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1, 2, 2, 2), new THREE.MeshBasicMaterial({ color: debugObject.color, wireframe: false }))
 
 scene.add(camera);
 scene.add(boxMesh);
+
+debugObject.spin = () => {
+    gsap.to(boxMesh.rotation, { 'duration': 2, 'y': boxMesh.rotation.y + Math.PI * 2, })
+}
+
+
+const cubeTweaks = gui.addFolder('Cube Tweaks')
+cubeTweaks.close()
+
+// simple add
+cubeTweaks.
+    add(boxMesh.position, 'y')
+
+// range
+cubeTweaks.
+    add(boxMesh.position, 'y').min(-3).max(3).step(0.01).name('elevation')
+
+cubeTweaks.
+    add(boxMesh, 'visible')
+
+cubeTweaks.
+    add(boxMesh.material, 'wireframe')
+
+cubeTweaks.
+    addColor(debugObject, 'color').onChange(() => boxMesh.material.color.set(debugObject.color))
+
+cubeTweaks
+    .add(debugObject, 'spin')
+
+
+debugObject.subDivision = 2
+
+cubeTweaks.
+    add(debugObject, 'subDivision').min(1).max(10).step(1).onFinishChange(() => {
+        boxMesh.geometry.dispose();
+        boxMesh.geometry = new THREE.BoxGeometry(1, 1, 1, debugObject.subDivision, debugObject.subDivision, debugObject.subDivision)
+    })
+
 
 
 const control = new OrbitControls(camera, canvas)
